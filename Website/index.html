@@ -1,0 +1,583 @@
+<!doctype html>
+<!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en-gb" class="isie ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en-gb" class="no-js"> <!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<title> Snake Voxels - An 8x8x8 LED Cube with a kick</title>
+	
+	<meta name="description" content="">
+	<meta name="author" content="">
+    
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <!-- **Favicon** -->
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
+    <!-- **CSS - stylesheets** -->
+    <link id="skin-css" href="skins/blue.css" rel="stylesheet" media="all" />    
+    <link id="default-css" href="style.css" rel="stylesheet" media="all" />
+    <link id="responsive-css" href="responsive.css" rel="stylesheet" media="all" />    
+	<!-- Syntax Highlighter -->
+    <script src="syntaxhighlighter/scripts/shCore.js"></script>
+    <link rel="stylesheet" href="syntaxhighlighter/styles/shCore.css" />
+    
+    <script src="syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <link rel="stylesheet" href="syntaxhighlighter/styles/shThemeRDark.css" />
+
+    <!-- **Font Awesome** -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="css/font-awesome-ie7.min.css">
+    <![endif]-->
+    
+    <!-- **Google - Fonts** -->
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    
+</head>
+
+<body>
+
+<!-- **Header** -->
+<header id="header">
+	<div class="container">
+    
+    	<!-- **Logo** -->
+        <div id="logo">
+            <a href="index.html" title=""> <img src="images/logo.png" alt="" title="" /> </a>
+        </div><!-- **Logo - End** --> 
+        
+        <!-- **Navigation** -->
+        <nav id="main-nav">
+        	<ul>
+            	<li class="current_page_item"> <a href="#home" title=""> Home </a> <span> </span> </li>
+                <li> <a href="#about" title=""> About </a> <span> </span> </li>
+                <li> <a href="#comp" title=""> Components </a> <span> </span> </li>
+                <li> <a href="#diag" title=""> Diagram </a> <span> </span> </li>
+                <li> <a href="#code" title=""> Code </a> <span> </span> </li>
+                <li> <a href="#gallery" title=""> Gallery </a> <span> </span> </li>
+                <li> <a href="#future" title=""> Improvements </a> <span> </span> </li>
+                <!-- <li> <a href="features.html" title="" class="external"> Features </a> <span> </span> </li> -->
+            </ul>        	
+        </nav> <!-- **Navigation - End** -->     	
+    
+    </div>
+</header><!-- **Header - End** -->
+
+<!-- **Main Section** -->
+<section id="main">
+	
+    <!-- **Home Content** -->
+	<article id="home" class="content">
+    	<div class="pattern">     
+        	<!-- **Container** -->   
+        	<div class="container">
+        
+                <hgroup class="main-title">
+                    <h1> Snake Voxels </h1>
+                    <h6> voxel <i>(n)</i>: the smallest distinguishable box-shaped part of a three-dimensional space. </h6>
+                </hgroup>
+                
+                <div class="hr-invisible"> </div>
+                
+                <!-- **Work Flow Column** -->
+                <div class="column one-fourth">
+                    <div class="work-flow">                    	
+                        <div class="rounded-icon"> <a href="#about" title=""><span class="write-icon"> </span></a> </div>
+                        <h5> <a href="#about" title=""> About </a> </h5>
+                        <p> For our embed. systems design project, we built an 8x8x8 LED Cube with a playable game of 3-Dimensional "Snake" using the mbed microcontroller. </p>                        
+                    </div>
+                </div><!-- **Work Flow Column - End** -->
+                
+                <!-- **Work Flow Column** -->
+                <div class="column one-fourth">
+                    <div class="work-flow">                    	
+                        <div class="rounded-icon"> <a href="#comp" title=""><span class="clock-icon"> </span></a> </div>
+                        <h5> <a href="#comp" title=""> Component List </a> </h5> 
+                        <p> See what we used in order to make this possible, LEDs and all. </p>                        
+                    </div>
+                </div><!-- **Work Flow Column - End** -->
+                
+                <!-- **Work Flow Column** -->
+                <div class="column one-fourth">
+                    <div class="work-flow">                    	
+                        <div class="rounded-icon"> <a href="#code" title=""><span class="pen-icon"> </span></a> </div>
+                        <h5> <a href="#code" title="">Design and Coding</a> </h5>
+                        <p> Take a look at how we made a controller interface for the cube, and used that to build a game of Snake! </p>                        
+                    </div>
+                </div><!-- **Work Flow Column - End** -->
+                
+                <!-- **Work Flow Column** -->
+                <div class="column one-fourth last">
+                    <div class="work-flow">                    	
+                        <div class="rounded-icon"> <a href="#gallery" title=""><span class="mail-icon"> </span></a> </div>
+                        <h5> <a href="#gallery" title="">Process in Pictures</a> </h5>
+                        <p> Documentation in the form of visual media of the progress and demonstration of our LED cube. </p>                        
+                    </div>
+                </div><!-- **Work Flow Column - End** -->            
+            	
+            </div> <!-- **Container - End** -->
+            <div class="home-shadow"> </div>     
+        </div>
+    </article><!-- **Home Content - End** -->
+    
+    <!-- **About Content** -->
+	<article id="about" class="content"> 
+    	<div class="pattern">   
+        	<!-- **Container** -->
+            <div class="container">     
+            
+                <hgroup class="main-title">
+                    <h2> About </h2>
+                    <h6> How exactly did we manage to pull this off? </h6> 
+                </hgroup>
+                
+                <hgroup class="intro-text">
+                    
+
+                    <!-- <h5> we are experts in developing your business. This is C.O.R.E </h5> -->
+                    <h6> <b>Team Members</b>: Josh Dunn, Ahmed Ismail, Christopher Rossi, Ryan Sartin</h6>
+                    <h6>
+                    In case you haven't yet done the math, an 8x8x8 LED cube consists of 512 indidual LEDs, 
+					all soldered together in a pattern that allows you to light any desired LED. It is immediately obvious 
+					that each LED cannot have it's own pin, since the mbed does not support such a number of digital output 
+					pins. To handle this problem, we connect each LED's VDD leg in a column to form 64 8-long LED columns. Even
+					with 64 columns, we decided to use I2C with I/O Expanders in orders to address all 64 columns, since the mbed still 
+					does not support this number of digital out pins. That takes care of trying to light any single LED in a column. 
+					To select the exact layer belong to the LED we want to turn on, we send GND (logic 0) to that layer. In order to do so, 
+					the GND leg of each LED in a layer must be connected, and then each of the 8 layers will be connected to the output of 
+					a 3-to-8 decoder, which will then be controlled by some digital out pins on the mbed. Here are some pictures that will 
+					help you visualize what is meant by the connections I have described:
+                    </h6>
+                </hgroup> 
+				
+				<div class="column one-third">
+                	<div class="bordered-box-content">
+						<img border="0" src="images/cube/layers.jpg">
+                    </div>
+                </div>
+				<div class="column one-third">
+                	<div class="bordered-box-content">
+						<img border="0" src="images/cube/columns.jpg">
+                    </div>
+                </div>
+				<div class="column one-third">
+                	<div class="bordered-box-content">
+						<img border="0" src="images/cube/columns2.jpg">
+                    </div>
+                </div>
+				
+				<!-- 
+                <div class="hr-invisible"> </div>            
+                
+                <div class="column one-third">
+                	<div class="bordered-box-content">
+                    	<div class="box-container">
+                            <div class="icon"> <span class="help-icon"> </span> </div>
+                            <h5> Help Develop your Business </h5>
+                            <p> Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda. </p>
+                        </div>
+                        <span class="border"> </span>
+                    </div>
+                </div>
+                <div class="column one-third">
+                	<div class="bordered-box-content">
+                    	<div class="box-container">
+                            <div class="icon"> <span class="strategy-icon"> </span> </div>
+                            <h5> Best Strategies </h5>
+                            <p> Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. </p>
+                        </div>
+                        <span class="border"> </span>
+                    </div>
+                </div>
+                <div class="column one-third last">
+                	<div class="bordered-box-content">
+                    	<div class="box-container">
+                            <div class="icon"> <span class="chemical-icon"> </span> </div>
+                            <h5> Complete Analysis </h5>
+                            <p> Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. </p>
+                        </div>
+                        <span class="border"> </span>
+                    </div>
+                </div>
+                -->
+            
+            </div><!-- **Container - End** -->
+        </div>
+    </article><!-- **Services Content - End** -->
+    
+    <!-- **Component Content** -->
+	<article id="comp" class="content dark-bg"> 
+    	<div class="pattern">   
+        	<!-- **Container** -->
+            <div class="container">    
+            
+                <hgroup class="main-title">
+                    <h2> Components </h2>
+                    <h6> Here's what we used to build this LED cube: </h6>
+                </hgroup>
+                
+                <div class="hr-invisible"> </div>
+                <ol class="comp_list">
+					<li>3mm Diffused Blue LEDs x 512 count</li>
+					<li>1 HD74HC138P 3-to-8 decoder</li>
+						<ul style="margin-bottom:0px"><li>Used to select/power a layer of the cube.</li></ul>
+					<li>8-16 NPN BJTs/NFETs</li>
+						<ul style="margin-bottom:0px"><li>Used to ensure the necessary current to each layer.</li></ul>
+					<li>4 MCP23017 16-bit I/O Expanders (I2C) </li>
+						<ul style="margin-bottom:0px"><li>Used for powering one of the 64 columns</li></ul>
+					<li>mbed microcontroller w/ an external 5v power supply</li>
+					<li>Solder/Soldering iron</li>
+					<li>Solid wire</li>
+					<li>PATIENCE</li>
+				</ol>
+                
+                <div class="hr"> </div>                
+                <div class="clear"> </div>
+                
+            
+            </div><!-- **Container - End** -->
+        </div>
+    </article><!-- **Component Content - End** -->
+    
+    <!-- **Diagram Content** -->
+	<article id="diag" class="content"> 
+    	<div class="pattern">   
+        	<!-- **Container** -->
+            <div class="container">    
+                
+                <hgroup class="main-title">
+                    <h2> Diagram </h2>
+                    <h6> This is the schematic of a sample 2x3x2 cube. Each layer has 6 (2 x 3) LEDs, with 2 layers total. </h6>
+                </hgroup>
+                
+                <div class="hr-invisible"> </div>
+                <center>
+					<div class="schematic">
+						<img src="images/schematic.jpg" border="1">
+					</div>
+				</center>
+				
+            </div><!-- **Container - End** -->
+        </div>
+    </article><!-- **Team Content - End** -->
+    
+    <!-- **Code Content** -->
+	<article id="code" class="content dark-bg"> 
+    	<div class="pattern">   
+        	<!-- **Container** -->
+            <div class="container">    
+                
+                <hgroup class="main-title">
+                    <h2> Code </h2>
+                    <h6> How we did it! </h6>
+                </hgroup>
+                
+                <!-- <div class="hr-invisible"> </div> -->
+				<!-- <div class="column one-half" > -->
+                <h5>main.cpp</h5>
+                  <iframe src="code/snake.html" border="0" style="width: 100%; height: 300px; margin-top:-5px"></iframe>
+				<div class="hr-invisible"> </div>  
+				<h5>LEDCube/LEDCube.cpp</h5>
+                  <iframe src="code/ledcube.html" border="0" style="width: 100%; height: 300px; margin-top:-5px"></iframe>
+                <div class="hr-invisible"> </div>
+                <h5>LEDCube/LEDCube.h</h5>
+                  <iframe src="code/ledcubeh.html" border="0" style="width: 100%; height: 300px; margin-top:-5px"></iframe>
+				 <div class="hr-invisible"> </div>
+                <h5>LinkedList_ll/linkedlist_ll.cpp</h5>
+                  <iframe src="code/llc.html" border="0" style="width: 100%; height: 300px; margin-top:-5px"></iframe>
+				 <div class="hr-invisible"> </div>
+                <h5>LinkedList_ll/linkedlist_ll.h</h5>
+                  <iframe src="code/llh.html" border="0" style="width: 100%; height: 300px; margin-top:-5px"></iframe>
+				<!-- </div> -->
+                                    
+                
+            </div><!-- **Container - End** -->
+        </div>
+    </article><!-- **Code Content - End** -->
+    
+    <!-- **Gallery Content** -->
+	<article id="gallery" class="content"> 
+    	<div class="pattern">   
+        	<!-- **Container** -->
+            <div class="container">    
+                
+                <hgroup class="main-title">
+                    <h2> Gallery </h2>
+                    <h6> You can judge us by the work we have done </h6>
+                </hgroup>
+                
+                <!-- <div class="hr-invisible"> </div> -->
+                
+                <center>
+                    <!-- <iframe src="https://www.facebook.com/video/embed?video_id=511879518849715" width="241" height="426" frameborder="0"></iframe> -->
+                    <iframe width="305" height="430" src="http://www.youtube.com/embed/ai0RX8REtYo" frameborder="0" allowfullscreen></iframe>
+                    <iframe width="305" height="430" src="http://www.youtube.com/embed/2IxIMojBc3M" frameborder="0" allowfullscreen></iframe>
+                    <iframe width="305" height="430" src="http://www.youtube.com/embed/Rp5ELPWpka8" frameborder="0" allowfullscreen></iframe>
+                    <!-- <iframe src="https://www.facebook.com/video/embed?video_id=511299855574348" width="241" height="426" frameborder="0"></iframe> -->
+                </center>
+
+                <!-- **Testimonial Carousel** -->
+                <div class="testimonial-carousel">
+                
+                    <div class="testimonial-slider-arrows">
+                        <a href="#" title="" id="prev"> <i class="icon-chevron-left"></i> </a>
+                        <a href="#" title="" id="next"> <i class="icon-chevron-right"></i>  </a>
+                    </div>
+                
+                    <ul id="testimonial-carousel">
+                        <li>
+                            <!-- **Testimonial Wrapper** -->
+                            <div class="testimonial-wrapper">
+                                <img src="images/cube/real_one.jpg" />
+                            </div><!--**Testimonial Wrapper - End**-->
+                        </li>
+                        
+                        <li>
+                            <!-- **Testimonial Wrapper** -->
+                            <div class="testimonial-wrapper">
+                                <img src="images/cube/one.jpg" />
+                            </div><!--**Testimonial Wrapper - End**-->
+                        </li>
+
+                        <li>
+                            <!-- **Testimonial Wrapper** -->
+                            <div class="testimonial-wrapper">
+                                <img src="images/cube/another_one.jpg" />
+                            </div><!--**Testimonial Wrapper - End**-->
+                        </li>
+
+                        <li>
+                            <!-- **Testimonial Wrapper** -->
+                            <div class="testimonial-wrapper">
+                                <img src="images/cube/real_two.jpg" />
+                            </div><!--**Testimonial Wrapper - End**-->
+                        </li>
+
+                        <li>
+                            <!-- **Testimonial Wrapper** -->
+                            <div class="testimonial-wrapper">
+                                <img src="images/cube/two.jpg" />
+                            </div><!--**Testimonial Wrapper - End**-->
+                        </li>
+
+                        <li>
+                            <!-- **Testimonial Wrapper** -->
+                            <div class="testimonial-wrapper">
+                                <img src="images/cube/three.jpg" />
+                            </div><!--**Testimonial Wrapper - End**-->
+                        </li>
+
+                        <li>
+                            <!-- **Testimonial Wrapper** -->
+                            <div class="testimonial-wrapper">
+                                <img src="images/cube/real_four.jpg" />
+                            </div><!--**Testimonial Wrapper - End**-->
+                        </li>
+
+                        <li>
+                            <!-- **Testimonial Wrapper** -->
+                            <div class="testimonial-wrapper">
+                                <img src="images/cube/four.jpg" />
+                            </div><!--**Testimonial Wrapper - End**-->
+                        </li>
+
+                        <li>
+                            <!-- **Testimonial Wrapper** -->
+                            <div class="testimonial-wrapper">
+                                <img src="images/cube/five.jpg" />
+                            </div><!--**Testimonial Wrapper - End**-->
+                        </li>
+
+                        <li>
+                            <!-- **Testimonial Wrapper** -->
+                            <div class="testimonial-wrapper">
+                                <img src="images/cube/six.jpg" />
+                            </div><!--**Testimonial Wrapper - End**-->
+                        </li>
+
+                        <li>
+                            <!-- **Testimonial Wrapper** -->
+                            <div class="testimonial-wrapper">
+                                <img src="images/cube/group.jpg" />
+                            </div><!--**Testimonial Wrapper - End**-->
+                        </li>
+
+                        <li>
+                            <!-- **Testimonial Wrapper** -->
+                            <div class="testimonial-wrapper">
+                                <img src="images/cube/bonus.jpg" />
+                            </div><!--**Testimonial Wrapper - End**-->
+                        </li>
+
+                    </ul>
+                
+                </div><!-- **Testimonial Carousel - End** -->              
+            
+            </div><!-- **Container - End** -->
+        </div>
+    </article><!-- **Gallery Content - End** -->
+    
+    <!-- **Contact Content** -->
+	<article id="future" class="content dark-bg"> 
+    	<div class="pattern">   
+        	<!-- **Container** -->
+            <div class="container">    
+                
+                <hgroup class="main-title">
+                    <h2> Future Work </h2>
+                    <h6> What we would do with more time on our hands.. </h6>
+                </hgroup>
+                
+                <div class="hr-invisible"> </div>
+                         
+                <div style="width:100%">
+                    <h6>
+                        Now that we have built the LED cube, the only stopping point is our imagination and creativity. To start, we would like 
+                        to incorporate a "better" gamepad. What we currently have is a seperate mini breadboard with 6 pushbuttons, 4 for each cardinal 
+                        direction and 2 for moving up and down the layers. To improve on this, we could use a 3-D Joystick in order to control the direction
+                        of the snake more naturally. There is also the option of adding a bluetooth receiver to the schematic and using a Wii-mote's accelerometer
+                        to control the direction of the snake. 
+                    </h6>
+                    <h6>
+                        Besides the control of the game, there's always software manipulation. Of course, there's no limit to the kinds of things you can do with an 
+                        LED Cube (e.g. a <a href="http://www.youtube.com/watch?v=JT99QlEn3q8"> <u>rain effect</u>   </a>, <a href="http://www.youtube.com/watch?v=qL5wIvxi4iM"><u>ripples</u
+                        ></a>, or of course, <a href="http://www.youtube.com/watch?v=yfP2Tx-Mzmo"><u>WOOPWOOP</u></a>.) The next stop for us will probably be to mess with some rotations:
+                        <div class="hr-invisible"> </div>
+                        <center>
+                            <iframe width="420" height="315" src="http://www.youtube.com/embed/6SFsxBFjO7s" frameborder="0" allowfullscreen></iframe>
+                        </center>
+                    </h6>
+                	<!-- <div class="dark-box">	
+                    	<h4> Enquiry </h4>
+                        <div class="message"></div>
+                    	<form action="php/sendmail.php" method="get" class="enquiry-form">
+                        	<p>
+                                <label> Your Name <span> (required) </span> </label>
+                                <input name="name" type="text" required>
+                            </p>
+                            <p>
+                                <label> E-mail <span> (required) </span> </label>
+                                <input type="email" name="email" autocomplete="off" required>
+                            </p>
+                            <p>
+                                <label> Message <span> (required) </span> </label>
+                                <textarea name="message" cols="5" rows="3" required></textarea>                            
+                            </p>
+                            <input name="submit" type="submit" value="Send Email">
+                        </form>
+                    </div> -->
+                </div>
+                
+                <div class="clear"> </div>
+                <div class="hr-invisible"> </div>
+                
+            </div><!-- **Container - End** -->
+        </div>
+    </article><!-- **Contact Content - End** -->
+    
+    <!-- **Footer** -->
+   	<footer id="footer">
+    	<div class="container">
+            <p class="copyright"> Georgia Institute of Technology, ECE 4180 Embedded Systems Lab </p>
+            <div class="social-share">
+                Designed by:
+                <a href="http://www.linkedin.com/pub/ahmed-ismail/1a/35a/422?trk=shareTw" title="" style="margin-right:5px;"> Ahmed Ismail</a> |&nbsp;&nbsp;
+				<a href="" title=""> CC Rossi </a> |&nbsp;&nbsp;
+				<a href="" title=""> Josh Dunn </a> |&nbsp;&nbsp;
+				<a href="" title=""> Ryan Sartin </a>
+            </div>    	
+        </div>
+    </footer><!-- **Footer - End** -->
+
+</section><!-- **Main Section** -->
+
+
+
+<!-- **jQuery** -->
+<script src="js/modernizr-2.6.2.min.js"></script>
+<script src="js/jquery.js"></script>
+
+<script src="js/jquery.easing.1.2.js"></script>
+<script src="js/jquery.visualNav.js"></script>    
+
+<script src="js/isotope.js"></script>
+
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="js/jquery.gmap.min.js"></script>
+
+<script src="js/jquery.mobilemenu.js"></script>
+<script src="js/core-custom.js"> </script>    
+
+<!-- Pretty Photo -->
+<link rel="stylesheet" href="css/prettyPhoto.css" media="screen" />
+<script src="js/jquery.prettyPhoto.js"></script>
+<script>
+    jQuery(document).ready(function($){			
+        $(".gallery a[data-gal^='prettyPhoto']").prettyPhoto({animation_speed:'normal',theme:'light_square',slideshow:3000, autoplay_slideshow: false,social_tools: false});				
+    });
+</script>
+
+<script src="js/jquery.carouFredSel-6.2.0-packed.js"></script>
+
+<!-- fire plugin onDocumentReady -->
+<script>
+
+function scrollTo(target){
+  var myArray = target.split('#');
+  var targetPosition = jQuery('#' + myArray[1]).offset().top;
+  jQuery('html,body').animate({ scrollTop: targetPosition}, 'slow');
+}
+		
+jQuery(document).ready(function($) {
+	$('#testimonial-carousel').carouFredSel({
+		responsive: true,
+		auto: false,
+		width: '100%',
+		prev: '#prev',
+		next: '#next',
+		height: 'auto',
+		scroll: 1,				
+		items: {
+			width: 460,
+			visible: {
+					min: 1,
+					max: 2
+				}
+		}				
+	});			
+	$('#blog-carousel').carouFredSel({
+		responsive: true,
+		auto: false,
+		width: '100%',
+		prev: '#prev2',
+		next: '#next2',
+		height: 'auto',
+		pagination: "#pager",
+		scroll: 1,				
+		items: {
+			width: 460,
+			visible: {
+					min: 1,
+					max: 2
+				}
+		}				
+	});
+});
+</script>
+
+<!-- Syntax Highlighter Activation -->
+<script type="text/javascript">
+    jQuery(document).ready(SyntaxHighlighter.all());
+</script>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+/*
+        WORDZ DAWG
+        word.
+*/
+
+#include "mbed.h"
+#include "LEDCube.h"
+
+LEDcube::LEDcube(I2C &i2c, PinName a, PinName b, PinName c, char deviceAddress, char numChip) : _i2c(i2c), _decode0(a), _decode1(b), _decode2(c){
+        
+    _numChips = numChip;
+    _baseWrite = deviceAddress & 0xFE;  // low order bit = 0 for write
+    _baseRead = deviceAddress | 0x01;   // low order bit = 1 for read 
+    
+    clearCube();
+  
+    _init();
+}
+
+void LEDcube::clearCube(){
+    int x;
+    int y;
+    
+    for(x = 0; x < 8; x++)
+        for(y = 0; y < 8; y++)
+            cubeData[x][y] = 0x00; // Previously 0xff
+}
+
+void LEDcube::plotPoint(signed char x, signed char y, signed char z){
+    if(x < 0 || x > 7) return; // Ignore bad data, snake function will catch it
+    if(y < 0 || y > 7) return; // so we are ok to just return
+    if(z < 0 || z > 7) return;
+    if(x == 1 && y == 7 && z == 4)
+        return;
+    cubeData[z][x] = cubeData[z][x] | (0x01 << y);
+}
+void LEDcube::clearPoint(signed char x, signed char y, signed char z){
+    if(x < 0 || x > 7) return;
+    if(y < 0 || y > 7) return;
+    if(z < 0 || z > 7) return;
+    cubeData[z][x] = cubeData[z][x] & ((0x01 << y)^0xff);
+} 
+
+void LEDcube::drawDiamond(char x, char y, char z, char x2, char y2, char z2){
+    if(x > x2 || y > y2 || z > z2)
+        return;
+    char Xtravel;
+    char Ztravel;
+    
+    char tempX;
+        
+    char xmid = (x2 + x)/2;
+    char ymid = (y2 + y)/2;
+    char zmid = (z2 + z)/2;
+    
+    for(Xtravel = x; Xtravel < x2; Xtravel++){
+        tempX = xmid - abs(xmid - Xtravel);
+        for(Ztravel = z; Ztravel < z2; Ztravel++){
+            if( Ztravel >= (zmid - tempX) && Ztravel <= (zmid + tempX)){
+                plotPoint(Xtravel, ymid + tempX - abs(Ztravel - zmid), Ztravel);
+                plotPoint(Xtravel, ymid - tempX + abs(Ztravel - zmid), Ztravel);
+            }
+        }
+    }    
+}
+
+void LEDcube::explodeDiamond(char x, char y, char z){
+    clearCube();
+    drawDiamond(x - 1, y - 1, z - 1, x + 1, y + 1, z + 1);
+    lightCube(CUBE_DELAY);
+    ////////////////////
+    wait(.3);
+    ////////////////////
+    clearCube();
+    drawDiamond(x - 2, y - 2, z - 2, x + 2, y + 2, z + 2);
+    lightCube(CUBE_DELAY);
+    clearCube();
+    //////////////
+    wait(.3);
+    /////////////
+}
+
+void LEDcube::shiftArray(){
+    int x, z;
+    char tempArr[8];
+    
+    for(z = 0; z < 8; z++)
+        tempArr[z] = cubeData[z][7];
+      
+    for(x = 7; x < 1; x--){
+        for(z = 7; z < 0; z--){
+            cubeData[z][x] = cubeData[z][x - 1];
+        }
+    }
+     for(z = 0; z < 8; z++)
+        cubeData[z][0] = tempArr[z];     
+}
+
+void LEDcube::lightLED(int x, int y){
+    char chip;
+    char port = GPIOB;
+    char byte;
+    
+    if(x > 7 || x < 0)
+        x = 0;
+    if(y > 7 || y < 0)
+        y = 0;
+        
+    byte = ((0x01 << y)^0xff);    
+    chip = x >> 1;
+        
+    if( x % 2 == 1){
+        port = GPIOA;
+        byte = reverse_byte(byte);
+    }
+
+    _write(chip, port, byte);
+}
+
+void LEDcube::lightPort(int x, char byte){
+    char chip;
+    char port = GPIOB;
+    
+    if(x > 7 || x < 0)
+        x = 0;
+        
+    chip = x >> 1;
+        
+    if( x % 2 == 1){
+        port = GPIOA;
+        byte = reverse_byte(byte);
+    }
+     _write(chip, port, byte); 
+}
+
+void LEDcube::lightCube(double myWait){
+    int layer;
+    int x;
+    for(layer = 0; layer < 8; layer++){
+        _decode0 = layer & 0x01;
+        _decode1 = layer & 0x02;
+        _decode2 = layer & 0x04;
+
+        // CHANGE LAYER OR SOMETHING
+        for(x = 0; x < 8; x++){           
+           lightPort(x, cubeData[layer][x]);    //A bit faster by removing for loop and using 2nd _write function
+        }
+        
+        wait(myWait);
+        
+        // WAITING
+        for(x = 0; x < 8; x++){           
+           lightPort(x, 0x00); // Previously 0xff
+        }
+    }
+}
+
+void LEDcube::_init() {
+    char i, j;
+    
+    if(DEBUG) printf("Begin initialization\n\r");
+    for(i = 0; i < _numChips; i++){
+        _write(i, IOCONA, 0x20); // Set to non-sequential registers
+        _write(i, IODIRA, 0x00); // Set Port A as outputs
+        _write(i, IODIRB, 0x00); // Set Port B as outputs 
+    }
+    
+    for(i = 0; i < 8; i++)
+        for(j = 0; j < 8; j++)
+            cubeData[j][i] = 0x00;
+}
+
+void LEDcube::_write(char chip, char address, char byte) {
+    char data[2];
+
+    data[0] = address;
+    data[1] = byte;
+  
+    _i2c.write((_baseWrite + (chip << 1)), data, 2);    // Write data to selected Register
+    wait(myDELAY);
+}
+
+void LEDcube::_write(char chip, char address, char portA, char portB) {
+    char data[3];
+
+    data[0] = address;
+    data[1] = portA;
+    data[2] = portB;
+       
+    _i2c.write((_baseWrite + (chip << 1)), data, 3);    // Write data to selected Register
+    wait(myDELAY);
+}
+
+unsigned char reverse_byte(unsigned char x)
+{
+    static const unsigned char table[] = {
+        0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0,
+        0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,
+        0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8,
+        0x18, 0x98, 0x58, 0xd8, 0x38, 0xb8, 0x78, 0xf8,
+        0x04, 0x84, 0x44, 0xc4, 0x24, 0xa4, 0x64, 0xe4,
+        0x14, 0x94, 0x54, 0xd4, 0x34, 0xb4, 0x74, 0xf4,
+        0x0c, 0x8c, 0x4c, 0xcc, 0x2c, 0xac, 0x6c, 0xec,
+        0x1c, 0x9c, 0x5c, 0xdc, 0x3c, 0xbc, 0x7c, 0xfc,
+        0x02, 0x82, 0x42, 0xc2, 0x22, 0xa2, 0x62, 0xe2,
+        0x12, 0x92, 0x52, 0xd2, 0x32, 0xb2, 0x72, 0xf2,
+        0x0a, 0x8a, 0x4a, 0xca, 0x2a, 0xaa, 0x6a, 0xea,
+        0x1a, 0x9a, 0x5a, 0xda, 0x3a, 0xba, 0x7a, 0xfa,
+        0x06, 0x86, 0x46, 0xc6, 0x26, 0xa6, 0x66, 0xe6,
+        0x16, 0x96, 0x56, 0xd6, 0x36, 0xb6, 0x76, 0xf6,
+        0x0e, 0x8e, 0x4e, 0xce, 0x2e, 0xae, 0x6e, 0xee,
+        0x1e, 0x9e, 0x5e, 0xde, 0x3e, 0xbe, 0x7e, 0xfe,
+        0x01, 0x81, 0x41, 0xc1, 0x21, 0xa1, 0x61, 0xe1,
+        0x11, 0x91, 0x51, 0xd1, 0x31, 0xb1, 0x71, 0xf1,
+        0x09, 0x89, 0x49, 0xc9, 0x29, 0xa9, 0x69, 0xe9,
+        0x19, 0x99, 0x59, 0xd9, 0x39, 0xb9, 0x79, 0xf9,
+        0x05, 0x85, 0x45, 0xc5, 0x25, 0xa5, 0x65, 0xe5,
+        0x15, 0x95, 0x55, 0xd5, 0x35, 0xb5, 0x75, 0xf5,
+        0x0d, 0x8d, 0x4d, 0xcd, 0x2d, 0xad, 0x6d, 0xed,
+        0x1d, 0x9d, 0x5d, 0xdd, 0x3d, 0xbd, 0x7d, 0xfd,
+        0x03, 0x83, 0x43, 0xc3, 0x23, 0xa3, 0x63, 0xe3,
+        0x13, 0x93, 0x53, 0xd3, 0x33, 0xb3, 0x73, 0xf3,
+        0x0b, 0x8b, 0x4b, 0xcb, 0x2b, 0xab, 0x6b, 0xeb,
+        0x1b, 0x9b, 0x5b, 0xdb, 0x3b, 0xbb, 0x7b, 0xfb,
+        0x07, 0x87, 0x47, 0xc7, 0x27, 0xa7, 0x67, 0xe7,
+        0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,
+        0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef,
+        0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff,
+    };
+    return table[x];
+}

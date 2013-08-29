@@ -1,0 +1,60 @@
+<html>
+<head>
+	<!-- Syntax Highlighter -->
+    <script src="syntaxhighlighter/scripts/shCore.js"></script>
+    <link rel="stylesheet" href="syntaxhighlighter/styles/shCore.css" />
+    
+    <script src="syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <link rel="stylesheet" href="syntaxhighlighter/styles/shThemeRDark.css" />
+
+    <style type="text/css">
+		.syntaxhighlighter { 
+		 overflow-y: hidden !important; 
+		 overflow-x: auto !important; 
+  }
+</style>
+
+</head>
+<body>
+	<script type="syntaxhighlighter" class="brush: cpp;"><![CDATA[
+/*
+    main.cpp
+*/
+
+#include "mbed.h"
+#include "LEDcube.h"
+
+// http://ww1.microchip.com/downloads/en/devicedoc/21952b.pdf
+DigitalOut myled(LED1);
+
+I2C my2c(p28, p27);
+
+int main() {
+    printf("Hello world!\n\r");
+    int x, y = 0;
+    char data = 0x00;
+    char change = -1;
+    int led = 1;
+    my2c.frequency(400000); // MCP23017 data sheet: 100kHz, 400kHz
+    LEDcube myCube(my2c, 0x40, 4);
+    
+    while(1) {
+        myled = led;
+
+        for(y = 0; y < 8; y++)
+            for(x = 0; x < 8; x++)
+                myCube.cubeData[x][y] = data;
+        
+        myCube.lightCube();
+        
+        led = 1 - led;
+    }
+}
+]]></script>
+
+<!-- Syntax Highlighter Activation -->
+<script type="text/javascript">
+    SyntaxHighlighter.all();
+</script>
+
+</body></html>
